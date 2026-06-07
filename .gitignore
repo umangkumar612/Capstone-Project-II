@@ -1,0 +1,28 @@
+# Python
+
+.venv/
+**pycache**/
+*.pyc
+
+# Node
+
+node_modules/
+dist/
+
+# Environment
+
+.env
+
+# IDE
+
+.idea/
+.vscode/
+
+# Uploads & Reports
+
+backend/data/uploads/
+backend/data/reports/
+
+# Logs
+
+*.log

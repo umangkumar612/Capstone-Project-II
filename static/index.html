@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Imaging Diagnosis Portal</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Private Medical Imaging</p>
+        <h1>Medical Imaging Diagnosis Portal</h1>
+      </div>
+      <nav class="tabs" aria-label="Dashboard navigation">
+        <button class="tab active" data-tab="patient">Patient</button>
+        <button class="tab" data-tab="doctor">Doctor</button>
+        <button class="tab" data-tab="admin">Admin</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="workspace active" id="patient">
+        <div class="panel upload-panel">
+          <h2>Upload Scan</h2>
+          <form id="uploadForm">
+            <label>Patient ID<input name="patientId" value="PAT-1001" required /></label>
+            <label>Patient Name<input name="patientName" value="Aarav Sharma" required /></label>
+            <label>Scan Type
+              <select name="scanType">
+                <option value="xray">X-Ray</option>
+                <option value="mri">MRI</option>
+                <option value="ct">CT Scan</option>
+              </select>
+            </label>
+            <label>Medical Image<input type="file" name="file" accept="image/*,.dcm" required /></label>
+            <button type="submit">Prepare Scan Review</button>
+          </form>
+        </div>
+
+        <div class="panel result-panel">
+          <h2>Scan Insight</h2>
+          <div id="predictionState" class="empty">Upload a scan to prepare diagnosis support.</div>
+          <div id="predictionResult" class="prediction hidden"></div>
+        </div>
+
+        <div class="panel history-panel">
+          <div class="panel-header">
+            <h2>Scan History</h2>
+            <button id="loadHistory" class="secondary">Refresh</button>
+          </div>
+          <div id="historyList" class="list"></div>
+        </div>
+      </section>
+
+      <section class="workspace" id="doctor">
+        <div class="panel wide">
+          <div class="panel-header">
+            <h2>Review Queue</h2>
+            <button id="refreshScans" class="secondary">Refresh</button>
+          </div>
+          <div id="doctorList" class="scan-grid"></div>
+        </div>
+        <div class="panel">
+          <h2>Doctor Approval</h2>
+          <form id="doctorForm">
+            <label>Scan ID<input name="scanId" placeholder="scan_xxxxx" required /></label>
+            <label>Doctor Name<input name="doctorName" value="Dr. Meera Rao" required /></label>
+            <label>Remarks<textarea name="remarks" rows="5">Scan findings reviewed. Recommend clinical correlation and follow-up.</textarea></label>
+            <label class="check"><input type="checkbox" name="approved" /> Approve diagnosis</label>
+            <button type="submit">Save Review</button>
+          </form>
+        </div>
+      </section>
+
+      <section class="workspace" id="admin">
+        <div class="panel wide">
+          <div class="panel-header">
+            <h2>Analytics</h2>
+            <button id="loadAnalytics" class="secondary">Update</button>
+          </div>
+          <div id="analytics" class="metrics"></div>
+        </div>
+        <div class="panel wide">
+          <h2>Confidence Score Graph</h2>
+          <canvas id="confidenceChart" width="900" height="260"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
